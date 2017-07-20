@@ -21,16 +21,23 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <%= link_to "New Post", new_post_path %>
-        </li>
-        <li>
-          <%= link_to "Login", '#' %>
-        </li>
-        <li>
-          <%= link_to "Register", '#' %>
-        </li>
-      </ul>
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to "New Post", new_post_path %>
+      </li>
+      <li>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to "Login", new_user_session_path %>
+      </li>
+      <li>
+        <%= link_to "Register", new_user_registration_path %>
+      </li>
+    <% end %>
+  </ul>
+
     </div>
   </div>
 </nav>
@@ -38,9 +45,12 @@
   </head>
 
   <body>
-    <%= yield %>
-
-
+    <div class="container">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: [:alert, alert_for(name)] %>
+      <% end %>
+      <%= yield %>
+    </div>
 
 
   </body>
