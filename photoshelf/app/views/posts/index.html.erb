@@ -29,16 +29,24 @@
 
 
 
-
-
             </div>
           <% end %>
         <% end %>
+        <% if user_signed_in? %>
         <div class="comment-form">
           <%= form_for [post, post.comments.new] do |f| %>
             <%= f.text_field :content, placeholder: 'Add a comment...' %>
+            <%end%>
+            </div>
+
+
+            <% else %>
+            <div class="btn btn-default">
+            <%= link_to "Login to comment..!",new_user_session_path %>
+            </div>
+
           <% end %>
-        </div>
+
       </div>
     </div>
   <% end %>
