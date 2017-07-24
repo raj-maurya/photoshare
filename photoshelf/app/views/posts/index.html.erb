@@ -16,6 +16,9 @@
             <%= post.user.user_name %>
           </div>
           <%= post.caption %>
+          <div class="pull-right">
+            <%= social_share_button_tag(post.image.url(:medium), :popup => "true" ) %>
+          </div>
         </div>
         <% if post.comments %>
           <% post.comments.each do |comment| %>
